@@ -109,11 +109,16 @@ public class Arrays extends PApplet {
 		float colorJump = 250 / rainfall.length;
 		float hue = 0;
 
+		float padding = 80;
+
 		float centerX = windowW / 2;
 		float centerY = windowH / 2;
-		float diameter = windowW;
+		float diameter = windowW - padding * 2;
 
 		float prevAngle = 0;
+
+		float x = centerX + diameter;
+		float y = centerY;
 
 		for (int i = 0; i < rainfall.length; i++) {
 
