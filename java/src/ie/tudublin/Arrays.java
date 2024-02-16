@@ -106,10 +106,11 @@ public class Arrays extends PApplet {
 
 		background(0);
 
-		float padding = 40;
-		float separation = padding / 5;
-		float colWidth = (width - 2 * padding - separation * months.length) / (float) months.length;
-		float x = padding;
+		float padding1 = 50;
+		float padding2 = padding1 + 20;
+		float separation = padding2 / 5;
+		float colWidth = (width - 2 * padding2 - separation * months.length) / (float) months.length;
+		float x = padding2;
 
 		float colorJump = 250 / months.length;
 		float hue = 0;
@@ -121,15 +122,17 @@ public class Arrays extends PApplet {
 
 		for (int i = 0; i < months.length; i++) {
 
-			float colHeight = map1(rainfall[i], 0, max, 0, windowH - 2 * padding);
+			float colHeight = map1(rainfall[i], 0, max, 0, windowH - 2 * padding1);
 
-			float y = padding + (windowH - 2 * padding - colHeight);
+			float y = padding1 + (windowH - 2 * padding1 - colHeight);
 
 			fill(hue, 255, 255);
+			stroke(hue, 255, 255);
 			rect(x, y, colWidth, colHeight);
 
+			stroke(255, 0, 255);
 			fill(255, 0, 255);
-			text(months[i], x + colWidth / 4, windowH - padding + 20);
+			text(months[i], x + colWidth / 4, windowH - padding1 + 20);
 
 			if (i > 0) {
 				line(x1, y1, x + colWidth / 2, y);
@@ -143,6 +146,38 @@ public class Arrays extends PApplet {
 			x += separation + colWidth;
 
 		}
+
+		float y = padding1;
+
+		for (int i = 0; i < (max / 20) - 1; i++) {
+
+			if (i > 0) {
+				y = windowH - map1(i, 0, max / 20, padding1, windowH - padding1);
+
+				line(padding1 - 2, y, padding1 + 2, y);
+
+				int newNum = 20 * i;
+				text("" + newNum, padding1 - getNumDigits((float) newNum) * 6 - 15, y + 3);
+			}
+
+		}
+
+		line(padding1, windowH - padding1, padding1, padding1);
+		line(padding1, windowH - padding1, windowW - padding1, windowH - padding1);
+
+	}
+
+	int getNumDigits(float num) {
+
+		int total = 0;
+		while (num / 10 >= 1) {
+
+			total++;
+			num /= 10;
+
+		}
+
+		return total;
 
 	}
 
