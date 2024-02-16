@@ -22,7 +22,7 @@ public class Arrays extends PApplet {
 	}
 
 	int windowW = 700;
-	int windowH = 600;
+	int windowH = 700;
 
 	public void settings() {
 		size(windowW, windowH);
@@ -106,6 +106,55 @@ public class Arrays extends PApplet {
 
 		background(0);
 
+		float colorJump = 250 / rainfall.length;
+		float hue = 0;
+
+		float centerX = windowW / 2;
+		float centerY = windowH / 2;
+		float diameter = windowW;
+
+		float prevAngle = 0;
+
+		for (int i = 0; i < rainfall.length; i++) {
+
+			fill(hue, 255, 255);
+
+			float newAngle = prevAngle + map1(rainfall[i], 0, sumArray(rainfall), 0, TWO_PI);
+
+			arc(centerX, centerY, diameter, diameter, prevAngle, newAngle);
+
+			prevAngle = newAngle;
+			hue += colorJump;
+
+		}
+
+	}
+
+	float sumArray(float[] myArr) {
+		float total = 0;
+
+		for (float i : myArr) {
+			total += i;
+		}
+
+		return total;
+	}
+
+	int getNumDigits(float num) {
+
+		int total = 0;
+		while (num / 10 >= 1) {
+
+			total++;
+			num /= 10;
+
+		}
+
+		return total;
+
+	}
+
+	void drawChart() {
 		float padding1 = 50;
 		float padding2 = padding1 + 20;
 		float separation = padding2 / 5;
@@ -164,21 +213,6 @@ public class Arrays extends PApplet {
 
 		line(padding1, windowH - padding1, padding1, padding1);
 		line(padding1, windowH - padding1, windowW - padding1, windowH - padding1);
-
-	}
-
-	int getNumDigits(float num) {
-
-		int total = 0;
-		while (num / 10 >= 1) {
-
-			total++;
-			num /= 10;
-
-		}
-
-		return total;
-
 	}
 
 }
