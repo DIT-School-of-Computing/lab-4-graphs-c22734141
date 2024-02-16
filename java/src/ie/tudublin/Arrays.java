@@ -116,6 +116,9 @@ public class Arrays extends PApplet {
 
 		stroke(255, 0, 255);
 
+		float x1 = x;
+		float y1 = 0;
+
 		for (int i = 0; i < months.length; i++) {
 
 			float colHeight = map1(rainfall[i], 0, max, 0, windowH - 2 * padding);
@@ -127,6 +130,13 @@ public class Arrays extends PApplet {
 
 			fill(255, 0, 255);
 			text(months[i], x + colWidth / 4, windowH - padding + 20);
+
+			if (i > 0) {
+				line(x1, y1, x + colWidth / 2, y);
+			}
+
+			x1 = x + colWidth / 2;
+			y1 = y;
 
 			hue += colorJump;
 
