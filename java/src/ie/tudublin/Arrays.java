@@ -102,6 +102,8 @@ public class Arrays extends PApplet {
 
 	}
 
+	int a = 0;
+
 	public void draw() {
 
 		background(0);
@@ -127,6 +129,24 @@ public class Arrays extends PApplet {
 			float newAngle = prevAngle + map1(rainfall[i], 0, sumArray(rainfall), 0, TWO_PI);
 
 			arc(centerX, centerY, diameter, diameter, prevAngle, newAngle);
+
+			fill(255, 0, 255);
+
+			float textAngle = prevAngle + ((newAngle - prevAngle) / 2);
+			float cos = cos(textAngle);
+			float sin = sin(textAngle);
+			if (a < months.length) {
+				print("Prev: " + prevAngle + "\nNew: " + newAngle + "\nText: " + textAngle + "\n");
+				print("Cos: " + cos + "  |  Sin: " + sin + "\n");
+
+				a++;
+			}
+
+			x = padding + map1(cos, -1, 1, 0, windowW - 2 * padding)
+					+ (cos > 0 ? 20 * abs(cos) : -20 * abs(cos) + months[i].length() * -6);
+			y = padding + map1(sin, -1, 1, 0, windowH - 2 * padding) + (sin > 0 ? 20 * abs(sin) : -20 * abs(sin));
+
+			text(months[i], x, y);
 
 			prevAngle = newAngle;
 			hue += colorJump;
